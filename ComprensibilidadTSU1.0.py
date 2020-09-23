@@ -546,27 +546,27 @@ def get_results(theses):
         print("================================")
         #   Obtain the sections
         sections = obtainSections(str(thesis))
-        print("Sections")
-        print(sections)
+        print("Obtaining Sections")
+        #print(sections)
         print("================================")
         #   Obtain the paragraphs per section
         paragraphs = obtainParagraphs(sections)
-        print("Paragraphs: ")
-        print(paragraphs)
+        print("Obtaining Paragraphs: ")
+        #print(paragraphs)
         print("================================")
         #   Obtain the sentences for each paragraph
         sentences = obtainSentences(paragraphs)
-        print("Sentences: ")
-        print(sentences)
+        print("Obtaining Sentences: ")
+        #print(sentences)
         print("================================")
         #   Tag the words for each sentence in the document
         taggs = tag_sentences_spacy(sentences)
-        print("Taggs: ")
-        print(taggs)
+        print("Obtaining Taggs: ")
+        #print(taggs)
         print("================================")
         #   Obtain the concepts for the complete document
         concepts_dictionary, set_of_concepts = get_concepts_by_matching(sentences)
-        print("Concepts dictionary: ")
+        print("Obtaining Concepts dictionary: ")
         print(concepts_dictionary)
         print("================================")
         print("Concepts found: ")
@@ -721,12 +721,17 @@ def std_handame(l, average):
 #   and returns the maximal value for each of them along with its respective
 #   position for the thesis.
 def get_maximal_and_thesis_position(results_array):
-    max_in_columns = numpy.amax(results_array, axis = 0)
+    max_in_columns = np.amax(results_array, axis = 0)
     max_index_col = np.argmax(results_array, axis = 0)
     return max_in_columns, max_index_col
 #   The following function receives the maximal index column and the thesis
 #   arrangement and returns an analysis for the thesis with the maximal values.
-def maximal_analysis(resuls_array, theses):
+def maximal_analysis(results_array, theses):
+    max_in_columns, max_index_col = get_maximal_and_thesis_position(results_array)
+    selected_theses = []
+    for selected in max_index_col:
+        selected_theses.append(theses[selected])
+    get_results(selected_theses)
     return 0
 
 
@@ -885,3 +890,9 @@ print("Sections: ", sections)
 # output_file.write(output_string)
 # output_file.close()
 results = get_results(theses)
+results = np.array(results)
+max_in_col, max_index_col = get_maximal_and_thesis_position(results)
+maximal_analysis(results, theses)
+print("Type of theses: ", type(theses))
+print("The maximal values per column: ", max_in_col)
+print("The index for the maximal values: ", max_index_col)
