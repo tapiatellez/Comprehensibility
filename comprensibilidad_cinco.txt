@@ -1,0 +1,5 @@
+Thesis number: 1 CB: 838 Connectivity: 64 Dispersion: 5.763600746458207
+Thesis number: 2 CB: 150 Connectivity: 40 Dispersion: 4.33304670492685
+Thesis number: 3 CB: 262 Connectivity: 110 Dispersion: 5.353770389050859
+Thesis number: 4 CB: 174 Connectivity: 34 Dispersion: 4.08746284125034
+Thesis number: 5 CB: 726 Connectivity: 76 Dispersion: 6.015594910211904

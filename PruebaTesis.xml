@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<body>
+<Informacion xmlns='http://www.w3.org/1999/xhtml' >
+
+<style type='text/css'>
+
+@charset 'utf-8';
+
+table{
+	border: 1px black solid;
+	border-radius: 5px;
+	min-width: 400px;
+	font-family: Helvetica,Arial;
+	margin-top: 10px;
+	margin-right: 40px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+	}
+
+table td{
+	padding:7px;
+    text-align:justify;
+	}
+
+.tablas_corpus {
+	font-family: Arial, Helvetica, sans-serif;
+	line-height:25px;
+	float:left;
+	}
+
+.tablas_corpus table{
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', Sans-Serif;
+	font-size: 14px;
+	text-align: left;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	}
+
+.tablas_corpus th {
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	color: #039;
+	border: 1px solid #FFFFFF;
+	}
+
+#campos{
+    text-align:center;
+    font-weight: bold;
+    color: #4646C1;
+	}
+
+.tablas_corpus td {
+	padding: 8px;
+	background: #e8edff;
+	color: #4E4E4E;
+	border: 1px solid #fff;
+	}
+
+.tablas_corpus tr:hover td {
+	background: #d0dafd;
+ 	}
+
+h1 {
+	color: #666666;
+ 	font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+	letter-spacing: -1px;
+	text-decoration: none;
+	text-shadow: 2px 2px #fff, 0 0 #0e0e0e, 3px 4px 2px #e3e3e3;
+	text-transform: none;
+	word-spacing: -2px;
+	}
+
+.titulo{
+	width: 1000px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #BDDDF2;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+	border-radius: 26px 26px 26px 26px;
+	}
+
+resultados{
+	float: right;
+	padding-right: 100px;
+    font-weight: bold;
+	margin-top: 40px;
+	margin-bottom: 10px;
+	}
+
+</style>
+<div class='titulo'> <center><h1> INAOE CORPUS </h1></center> </div>
+<resultados> Resultados = 227</resultados>
+<div class='tablas_corpus'>
+	<table>
+		<Tesis>
+			<tr>
+				<td width='180' id='campos' >Grado_de_Tesis</td>
+				<td width='1000'>
+					<Grado_de_Tesis>TSU</Grado_de_Tesis>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Titulo</td>
+				<td width='1000'>
+					<Titulo>ARQUITECTURAS Y TECNOLOGÍAS DE INTERCONEXIÓN DE REDES DE COMPUTO</Titulo>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Objetivo</td>
+				<td width='1000'>
+					<Objetivo>Describir el desarrollo de las redes de cómputo.</Objetivo>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Tipo</td>
+				<td width='1000'>
+					<Tipo>positivo</Tipo>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Otros</td>
+				<td width='1000'>
+					<Otros>proyecto terminal
+ARQULTETURAS Y TECNOLOGÍAS
+DE INTERCONEXION DE
+REDES DE COMPUTO
+ALUMNA
+ARACELI PEREZ VALDEZ HERNANDEZ</Otros>
+				</td>
+			</tr >
+		</Tesis>
+	</table>
+</div>
+<div class='tablas_corpus'>
+	<table>
+		<Tesis>
+			<tr>
+				<td width='180' id='campos' >Grado_de_Tesis</td>
+				<td width='1000'>
+					<Grado_de_Tesis>TSU</Grado_de_Tesis>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Titulo</td>
+				<td width='1000'>
+					<Titulo>AUTOMATIZACIÓN DEL MÓDULO DE CAJA.</Titulo>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Problema</td>
+				<td width='1000'>
+					<Problema>AUTOMATIZACIÓN DEL MÓDULO
+DE CAJA.El proceso que se realiza en la actualidad no permite conocer la información
+oportunamente, ya que el tiempo que se llevan en recopilar la información depende
+de las personas involucradas en el proceso, además de que se presta a errores y
+malos manejos.
+El usuario tiene que trasladarse hasta las oficinas administrativas de la empresa para
+llenar la solicitud, y para llevar el control de la comprobación de los gastos lo hacen a
+través de una hoja de Excel, de la cual si no actualizan sus formulas, generan datos
+incorrectos.
+En cuestión de almacenamiento lo único que se guarda directo al servidor es el
+monto de dinero solicitado durante el día, pero no la información generada de cada
+uno de los solicitantes que es importante para el seguimiento del proceso.
+Para el departamento de contabilidad es bastante laborioso, ubicar cada uno de los
+diferentes gastos en las cuentas contables al final del mes cuando generan la póliza,
+debido a que tienen que recurrir a cada una de las solicitudes y en cuando la solicitud
+no muestra la información necesaria, entonces deben dirigirse personalmente con el
+solicitante y preguntarle sobre los gastos que realizó.
+En los casos en que el solicitante no presente sus comprobantes de gastos, muchas
+veces por errores técnicos el dinero que les fue otorgado no se les descuenta de nomina y por política de la empresa, todo solicitante que no realice la comprobación,
+tendrá que devolver al 100% el dinero otorgado.
+Por último, no existe ningún tipo de reporte que muestre información sobre el
+departamento de caja, por lo que es cuestionable su buen funcionamiento.</Problema>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Objetivo</td>
+				<td width='1000'>
+					<Objetivo>Desarrollar e implementar un sistema para la automatización del departamento de
+caja de la empresa PATSA, Servicios S.A. de C.V., con el fin de obtener información
+al día de lo que ocurre durante el proceso que se lleva a cabo en el departamento,
+tener control de cada una de las solicitudes de dinero y almacenar la información
+para consultas informativas y estadísticas.</Objetivo>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Justificacion</td>
+				<td width='1000'>
+					<Justificacion>El departamento de caja de la empresa PATSA tiene las siguientes características en
+cuanto a su proceso:
+El departamento de caja cuenta con un fondo fijo diario de $20,000 es decir durante
+el día el personal de la empresa puede solicitar dinero a dicho departamento
+mientras se tenga la cantidad disponible solicitada.
+El proceso de caja consiste en llenar un recibo manualmente donde se debe colocar
+la fecha, el importe y la descripción de los gastos que se pretenden realizar. En las
+oficinas los jefes de área cuentan con estos recibos pero en las demás áreas de la
+empresa el solicitante se tiene que trasladar hasta oficinas para llenar dicho recibo.
+Al final del día la persona encargada de caja utiliza una sumadora para calcular el
+dinero otorgado de todas las solicitudes, con el riesgo de que se pueda traspapelar
+alguna de estas.
+El departamento de Contabilidad recibe la documentación de los usuarios después
+de haber realizado sus gastos, y este departamento tiene que clasificar todos esos
+gastos en cada una de las cuentas contables que maneja el departamento, estas se
+encuentran integradas por una cuenta de mayor, una sub-cuenta, una sub-subcuenta
+y una sub-sub-sub-cuenta. Así que para esto la persona del departamento de
+contabilidad encargada de capturar esta información deberá conocer el área y la
+sección en la que labora el usuario que entregó dicha documentación o de lo contrario buscar los datos necesarios para poder capturar finalmente los gastos
+generados.
+También es difícil obtener información estadística del proceso y aún más difícil
+detectar anomalías y/o errores ocasionados por las personas involucradas en el
+proceso. La única manera de lograrlo es hacer un sistema que capture la información
+necesaria que se genera en el departamento de caja, logrando tener un mejor control
+del dinero solicitado así como un control de los usuarios que piden el dinero, no
+importando el área y la sección a la que pertenezcan y no habrá necesidad de salir a
+oficinas a pedir el recibo para su llenado, ya que si el área de la empresa donde se
+encuentra el usuario cuenta con una computadora y acceso a la red LAN, se podrá
+capturar desde ahí la solicitud.
+Se pretende que el usuario sea responsable de sus propias solicitudes y tenga a la
+vez el control de las mismas.
+Lo más importante y trascendental es que el sistema de caja forma parte de la
+información que se almacenará para calcular los gastos totales de toda la empresa
+con el único fin de que se pueda tener el costo del pollo en cualquier momento del
+procesamiento.
+Los departamentos beneficiados con este sistema son el de contabilidad, caja y
+gerencia.
+Contabilidad: Podrá realizar de una manera eficiente y confiable las pólizas de
+egresos que realizaban anteriormente de forma manual, así como el envío de los
+gastos a sus respectivos centros de costo.
+Caja: Podrá hacer su solicitud de cheque de una manera confiable sin necesidad de
+sumar cada una de las solicitudes concedidas. Se le facilitará un menú donde pueda
+generar reportes para conocer la actividad del departamento y podrá modificar las
+solicitudes de los usuarios en los casos en que estas presenten errores.
+Gerencia: Se le han reservado una serie de reportes que le muestran datos
+específicos de los movimientos ocurridos en Caja y que le serán de suma
+importancia para conocer de forma oportuna el funcionamiento de este sistema.
+Para este proyecto no se requerirá de la adquisición de software o hardware
+adicional, ya que en todos los departamentos de la empresa cuentan por lo menos
+con una computadora con acceso al servidor mediante la red LAN. En el caso de que
+el usuario tenga algún problema en el manejo de la PC, la persona encargada del
+departamento de caja podrá realizar el proceso del usuario.</Justificacion>
+				</td>
+			</tr >
+			<tr>
+				<td width='180' id='campos' >Resultados</td>
+				<td width='1000'>
+					<Resultados>Al final del tiempo estimado se logró cumplir con el objetivo de automatizar los
+procesos que lleva a cabo el departamento de Caja, logrando obtener información en
+tiempo y forma, lo cual es indispensable para la empresa.
+El proyecto otorga bases para el desarrollo de otros proyectos y marca un logro en el
+desempeño que se tuvo para la realización del mismo.
+Cabe mencionar la importancia y relevancia del proyecto en función de los beneficios
+obtenidos:
+· El proceso dejó de ser un proceso manual y se convirtió en automático, donde
+la información que se obtiene es la mas fidedigna y concreta.
+· El usuario puede llevar a cabo el seguimiento de sus solicitudes, hasta que
+llegan al departamento de contabilidad.
+· Se pueden obtener reportes de los movimientos del departamento en
+cualquier y de cualquier fecha del año.
+· Cada gasto es enviado a sus respectivas cuentas contables.
+Se debe mencionar que al sistema se le hicieron varias pruebas antes y durante la
+implantación que permitieron conocer mejor el desempeño, logrando así un sistema
+muy eficiente y funcional.
+Podemos asegurar su buen funcionamiento debido a que en estos momentos el
+sistema trabaja de forma correcta y se ha logrado cumplir con los objetivos
+propuestos al inicio.</Resultados>
