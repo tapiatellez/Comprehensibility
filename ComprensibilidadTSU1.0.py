@@ -404,7 +404,7 @@ def get_document_concept_graph(concepts, paragraphs_occurrences):
 #############################################
 #    Functions for sequentiality measure    #
 #############################################
-#   The following function obtain the
+
 #   The following function obtains the significance of a concept in a respective
 #   paragraph
 def get_significance(concept, paragraph, related_concepts_dictionary, paragraphs_concepts_weighted):
@@ -458,6 +458,17 @@ def get_paragraphs_significance_dictionary(concept, paragraphs_occurrences, rela
     for paragraph in paragraphs_occurrences:
         paragraphs_significance_dictionary[paragraph] = get_significance(concept, paragraph, related_concepts_dictionary, paragraphs_concepts_weighted)
     return paragraphs_significance_dictionary
+#   The following function obtains the significance per paragraph for each of the
+#   concepts obtained. It returns a dictionary with the form:
+#   concepts : paragraphs : significance
+def get_concepts_paragraph_significance(concepts, paragraphs_occurrences, related_concepts_dictionary, paragraphs_concepts_weighted):
+    concepts_paragraphs_significance_dictionary = {}
+    for concept in concepts:
+        paragraphs_significance_dictionary = {}
+        for paragraph in paragraphs_occurrences:
+            paragraphs_significance_dictionary[paragraph] = get_significance(concept, paragraph, related_concepts_dictionary, paragraphs_concepts_weighted)
+        concepts_paragraphs_significance_dictionary[concept] = paragraphs_significance_dictionary
+    return concepts_paragraphs_significance_dictionary
 #   The following function receives a dictionary with the structure:
 #   paragraphs-significance, and returns the first paragraph with the best
 #   significance.
@@ -474,17 +485,20 @@ def get_comprehension_burden_per_concept(concept, key_paragraph, related_concept
         else:
             break
     return sum_concept
+
 #   The following function returns the comprehension burden for all the concepts
 #   in the document.
 def get_document_comprehension_burden(set_of_concepts, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted):
     comprehension_burden = 0
+    concept_comprehension_burden_dictionary = {}
     for concept in set_of_concepts:
         key_paragraph = get_key_paragraph_for_significance(concept,
                                                set_of_concepts,
                                                related_concepts_dictionary,
                                                paragraphs_occurrences_weighted, paragraphs_occurrences)
         comprehension_burden = comprehension_burden + get_comprehension_burden_per_concept(concept, key_paragraph, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted)
-    return comprehension_burden
+        concept_comprehension_burden_dictionary[concept] = get_comprehension_burden_per_concept(concept, key_paragraph, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted)
+    return comprehension_burden, concept_comprehension_burden_dictionary
 
 ###########################################################
 #                Connectivity Measure                     #
@@ -503,10 +517,12 @@ def get_connectivity(concept_node, document_concept_graph):
 #   connectivity measure for the entire document.
 def get_document_connectivity(document_concept_graph):
     document_connectivity = 0
+    concept_node_connectivity_dictionary = {}
     for concept_node in document_concept_graph.keys():
         document_connectivity = document_connectivity + get_connectivity(concept_node, document_concept_graph)
+        concept_node_connectivity_dictionary[concept_node] = get_connectivity(concept_node, document_concept_graph)
     document_connectivity = document_connectivity/len(document_concept_graph.keys())
-    return document_connectivity
+    return document_connectivity, concept_node_connectivity_dictionary
 ##########################################################
 #                    Dispersion Measure                  #
 ##########################################################
@@ -526,10 +542,12 @@ def get_paragraph_entropy(paragraph, set_of_concepts, paragraphs_occurrences_wei
 #   returns the dispersion of the whole document.
 def get_dispersion(set_of_concepts, paragraphs_occurrences_weighted):
     dispersion = 0
+    entropy_paragraph_dic = {}
     for paragraph in paragraphs_occurrences_weighted.keys():
         dispersion = dispersion + get_paragraph_entropy(paragraph, set_of_concepts, paragraphs_occurrences_weighted)
+        entropy_paragraph_dic[paragraph] = get_paragraph_entropy(paragraph, set_of_concepts, paragraphs_occurrences_weighted)
     dispersion = dispersion/len(paragraphs_occurrences_weighted.keys())
-    return dispersion
+    return dispersion, entropy_paragraph_dic
 ############################################################
 #                         Results                          #
 ############################################################
@@ -581,6 +599,11 @@ def get_results(theses):
         paragraphs_occurrences_weighted = get_paragraph_occurrences_weigth(paragraphs_occurrences)
         print("Paragraphs Occurrences Weighted")
         print(paragraphs_occurrences_weighted)
+        #   Obtain the significance per paragraph for each of the concepts.
+        related_concepts_dictionary = get_related_concepts(set_of_concepts, paragraphs_occurrences)
+        concepts_paragraphs_significance = get_concepts_paragraph_significance(set_of_concepts, paragraphs_occurrences, related_concepts_dictionary, paragraphs_occurrences_weighted)
+        print("Concepts : paragraphs : significance")
+        print(concepts_paragraphs_significance)
         print("================================")
         #   Obtain the key paragraph for each concept
         occurrences_key_paragraph= get_key_paragraph(set_of_concepts, paragraphs_occurrences_weighted)
@@ -620,7 +643,11 @@ def get_results(theses):
         print("Results for thesis number: ", counter)
         #  Get the comprehension burden for the whole document
         print("################################################")
-        document_cb = get_document_comprehension_burden(set_of_concepts, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted)
+
+        document_cb, concept_cb_dic = get_document_comprehension_burden(set_of_concepts, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted)
+        print("Concept Comprehension Burden Dictionary: ")
+        print(concept_cb_dic)
+        print("#############################################################")
         print("Comprehension Burden for the complete document: ", document_cb)
         #   Connectivity
         #   Obtain the connectivity for the concept_node of "cuestión de almacenamiento".
@@ -628,7 +655,10 @@ def get_results(theses):
         # print("Connectivity for cuestión de almacenamiento: ", check_connectivity)
         #   Obtain the connectivity for the entire document
         print("################################################")
-        document_connectivity = get_document_connectivity(document_concept_graph)
+        document_connectivity, cn_con_dic = get_document_connectivity(document_concept_graph)
+        print("Connectivity per Concept Node Dictionary")
+        print(cn_con_dic)
+        print("################################################")
         print("Connectivity for the complete document: ", document_connectivity)
         #   Obtain the probability of "cuestión de almacenamiento"
         # check_probability = get_concept_probability("cuestión de almacenamiento", set_of_concepts)
@@ -638,7 +668,9 @@ def get_results(theses):
         # print("Entropy for Par4: ", check_entropy)
         #   Obtain the dispersion for the entire document
         print("################################################")
-        dispersion = get_dispersion(set_of_concepts, paragraphs_occurrences_weighted)
+        dispersion, par_dis_dic = get_dispersion(set_of_concepts, paragraphs_occurrences_weighted)
+        print("Dispersion per paragraph: ")
+        print(par_dis_dic)
         print("Dispersion of the complete document: ", dispersion)
         print("=================================================")
         output_string = output_string + "Thesis number: " + str(counter) + " CB: " + str(document_cb) + " Connectivity: " + str(document_connectivity) + " Dispersion: " + str(dispersion) + "\n"
