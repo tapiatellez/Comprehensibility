@@ -27,6 +27,11 @@ jar = "/Users/administrador/Downloads/stanford-tagger-4.0.0/stanford-postagger.j
 #   Spacy tagger
 nlp = sp.load("es_core_news_sm")
 matcher = Matcher(nlp.vocab)
+#Globa Variables
+counter_pattern1 = 0
+counter_pattern2 = 0
+counter_pattern3 = 0
+counter_pattern4 = 0
 #Functions:
 ################################################
 #   Functions Related to the Representation    #
@@ -240,7 +245,20 @@ def get_concepts(tagg_dict):
             concept_dictionary[sec] = None
 
     return concept_dictionary, concepts
-#   The following function receives a dictionary with the form: sec-par-sen and
+#   The following functions react to the different matching situations.
+def on_match1(matcher, doc, id, matches):
+    global counter_pattern1
+    print("Matched!", matches)
+    counter_pattern1 = counter_pattern1 + 1
+def on_match2(matcher, doc, id, matches):
+    global counter_pattern2
+    counter_pattern2 = counter_pattern2 + 1
+def on_match3(matcher, doc, id, matches):
+    global counter_pattern3
+    counter_pattern3 = counter_pattern3 + 1
+def on_match4(matcher, doc, id, matches):
+    global counter_pattern4
+    counter_pattern4 = counter_pattern4 +1#   The following function receives a dictionary with the form: sec-par-sen and
 #   creates a dictionary of the for sec-par-sen-concepts.
 def get_concepts_by_matching(s_dictionary):
     concept_dictionary = {}
@@ -255,6 +273,7 @@ def get_concepts_by_matching(s_dictionary):
     pattern4 = [{'POS': 'NOUN'},
                {'POS': 'ADJ', 'OP': '?'},
                {'POS': 'ADP'},
+               {'POS': 'DET'},
                {'POS': 'NOUN'},
                {'POS': 'ADJ', 'OP': '*'}]
     # pattern5 = [{'POS': 'NOUN'},
@@ -263,10 +282,10 @@ def get_concepts_by_matching(s_dictionary):
     #            {'POS': 'VERB'},
     #            {'POS': 'NOUN', 'OP': {'POS': 'ADJ', 'OP': '*'}}]
 
-    matcher.add("Concept1", None, pattern1)
-    matcher.add("Concept2", None, pattern2)
-    matcher.add("Concept3", None, pattern3)
-    matcher.add("Concept4", None, pattern4)
+    matcher.add("Concept1", on_match1, pattern1)
+    matcher.add("Concept2", on_match2, pattern2)
+    matcher.add("Concept3", on_match3, pattern3)
+    matcher.add("Concept4", on_match4, pattern4)
     for sec, paragraphs in s_dictionary.items():
         concept_par = {}
         if paragraphs:
@@ -928,3 +947,8 @@ maximal_analysis(results, theses)
 print("Type of theses: ", type(theses))
 print("The maximal values per column: ", max_in_col)
 print("The index for the maximal values: ", max_index_col)
+
+print("Counter for pattern1: ", counter_pattern1)
+print("Counter for pattern2: ", counter_pattern2)
+print("Counter for pattern3: ", counter_pattern3)
+print("Counter for pattern4: ", counter_pattern4)

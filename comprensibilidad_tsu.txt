@@ -1,5 +1,5 @@
-Thesis number: 0 CB: 5049660 Connectivity: 4.412371134020619 Dispersion: 0.7759021385924167
-Thesis number: 1 CB: 5049660 Connectivity: 4.412371134020619 Dispersion: 0.7759021385924167
-Thesis number: 2 CB: 0 Connectivity: 0.0 Dispersion: 2.122259445516018
-Average results: cb: 3366440.0 connectivity: 2.941580756013746 dispersion: 1.2246879075669506
-Standard Deviation: cb: 2380432.552457641 connectivity: 2.080011699985171 dispersion: 0.6346789210838243
+Thesis number: 0 CB: 1135471 Connectivity: 3.6903225806451614 Dispersion: 0.8203524748584061
+Thesis number: 1 CB: 1552 Connectivity: 4.5 Dispersion: 0.5082375043390311
+Thesis number: 2 CB: 0 Connectivity: 0.0 Dispersion: 2.394507738943096
+Average results: cb: 379007.6666666667 connectivity: 2.7301075268817208 dispersion: 1.2410325727135112
+Standard Deviation: cb: 534900.7279762812 connectivity: 1.9585725604983246 dispersion: 0.8255231303187307
