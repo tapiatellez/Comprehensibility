@@ -400,7 +400,7 @@ def get_related_concepts(concepts, paragraphs_occurrences):
                 for paragrah, occurrences in paragraphs_occurrences.items():
                     if concept in occurrences and related_concept in occurrences:
                         counter += 1
-                if counter > 1:
+                if (counter > 2) and (related_concept not in related_concept_list):
                     related_concept_list.append(related_concept)
         related_concepts_dictionary[concept] = related_concept_list
     return related_concepts_dictionary
@@ -498,8 +498,8 @@ def get_best_paragraph_significance(paragraphs_significance_dictionary):
 #   for the concept.
 def get_comprehension_burden_per_concept(concept, key_paragraph, related_concepts_dictionary, paragraph_recurrences, paragraphs_occurrences_weighted):
     sum_concept = 0
-    for paragraph in paragraph_recurrences.keys():
-        if paragraph != key_paragraph:
+    for paragraph, occurrences in paragraph_recurrences.items():
+        if ((paragraph != key_paragraph) and (concept in occurrences)):
             sum_concept = sum_concept + get_significance(concept, key_paragraph, related_concepts_dictionary, paragraphs_occurrences_weighted)
         else:
             break
