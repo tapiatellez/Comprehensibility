@@ -32,6 +32,7 @@ counter_pattern1 = 0
 counter_pattern2 = 0
 counter_pattern3 = 0
 counter_pattern4 = 0
+counter_pattern5 = 0
 #Functions:
 ################################################
 #   Functions Related to the Representation    #
@@ -258,7 +259,11 @@ def on_match3(matcher, doc, id, matches):
     counter_pattern3 = counter_pattern3 + 1
 def on_match4(matcher, doc, id, matches):
     global counter_pattern4
-    counter_pattern4 = counter_pattern4 +1#   The following function receives a dictionary with the form: sec-par-sen and
+    counter_pattern4 = counter_pattern4 +1
+def on_match5(matcher, doc, id, matches):
+    global counter_pattern5
+    counter_pattern5 = counter_pattern5 + 1
+#   The following function receives a dictionary with the form: sec-par-sen and
 #   creates a dictionary of the for sec-par-sen-concepts.
 def get_concepts_by_matching(s_dictionary):
     concept_dictionary = {}
@@ -276,6 +281,18 @@ def get_concepts_by_matching(s_dictionary):
                {'POS': 'DET'},
                {'POS': 'NOUN'},
                {'POS': 'ADJ', 'OP': '*'}]
+    pattern5 = [{'POS' : 'NOUN'},
+                {'POS': 'ADJ', 'OP':'?'},
+                {'POS': 'ADP'},
+                {'POS': 'VERB'},
+                {'POS': 'NOUN', 'OP': '?'}]
+    pattern6 = [{'POS' : 'NOUN'},
+                {'POS': 'ADJ', 'OP':'?'},
+                {'POS': 'ADP'},
+                {'POS': 'VERB'},
+                {'POS': 'NOUN'},
+                {'POS': 'ADJ'}]
+
     # pattern5 = [{'POS': 'NOUN'},
     #            {'POS': 'ADJ', 'OP': '?'},
     #            {'POS': 'ADP'},
@@ -286,6 +303,8 @@ def get_concepts_by_matching(s_dictionary):
     matcher.add("Concept2", on_match2, pattern2)
     matcher.add("Concept3", on_match3, pattern3)
     matcher.add("Concept4", on_match4, pattern4)
+    matcher.add("Concept5", on_match5, pattern5)
+    matcher.add("Concept6", on_match5, pattern6)
     for sec, paragraphs in s_dictionary.items():
         concept_par = {}
         if paragraphs:
@@ -743,17 +762,17 @@ def get_avg_and_sd_handmade(results_array):
         cb.append(line[0])
         con.append(line[1])
         dis.append(line[2])
-    print(cb)
-    print(con)
-    print(dis)
+    #print(cb)
+    #print(con)
+    #print(dis)
     avg.append(average_handmade(cb))
     avg.append(average_handmade(con))
     avg.append(average_handmade(dis))
-    print(avg)
+    #print(avg)
     std.append(std_handame(cb, avg[0]))
     std.append(std_handame(con, avg[1]))
     std.append(std_handame(dis, avg[2]))
-    print(std)
+    #print(std)
 #   The following function receives a list and returns the average for the values
 #   in the list.
 def average_handmade(l):
@@ -816,139 +835,18 @@ print("theses_ten[0]: ")
 print(theses_ten[0])
 sections = obtainSections(str(theses_ten[0]))
 print("Sections: ", sections)
-#   Check for the five selected theses
-# output_file = open("comprensibilidad_tsu.txt", "w+")
-# counter = 0
-# output_string = ""
-# results = []
-# for thesis in theses:
-#     print("Working on thesis number: ", counter)
-#     print("================================")
-#     #   Obtain the sections
-#     sections = obtainSections(str(thesis))
-#     print("Sections")
-#     print(sections)
-#     print("================================")
-#     #   Obtain the paragraphs per section
-#     paragraphs = obtainParagraphs(sections)
-#     print("Paragraphs: ")
-#     print(paragraphs)
-#     print("================================")
-#     #   Obtain the sentences for each paragraph
-#     sentences = obtainSentences(paragraphs)
-#     print("Sentences: ")
-#     print(sentences)
-#     print("================================")
-#     #   Tag the words for each sentence in the document
-#     taggs = tag_sentences_spacy(sentences)
-#     print("Taggs: ")
-#     print(taggs)
-#     print("================================")
-#     #   Obtain the concepts for the complete document
-#     concepts_dictionary, set_of_concepts = get_concepts_by_matching(sentences)
-#     print("Concepts dictionary: ")
-#     print(concepts_dictionary)
-#     print("================================")
-#     print("Concepts found: ")
-#     print(set_of_concepts)
-#     print("================================")
-#     #   Obtain the occurrences in the document
-#     paragraphs_occurrences = get_occurrences_per_paragraph(concepts_dictionary)
-#     print("Paragraphs occurences dictionary: ")
-#     print(paragraphs_occurrences)
-#     print("================================")
-#     #   Obtain the occurrences with their respective weight per paragraph
-#     paragraphs_occurrences_weighted = get_paragraph_occurrences_weigth(paragraphs_occurrences)
-#     print("Paragraphs Occurrences Weighted")
-#     print(paragraphs_occurrences_weighted)
-#     print("================================")
-#     #   Obtain the key paragraph for each concept
-#     occurrences_key_paragraph= get_key_paragraph(set_of_concepts, paragraphs_occurrences_weighted)
-#     print("Occurrences and key paragraph")
-#     print(occurrences_key_paragraph)
-#     print("==============================")
-#     #   Obtain the related concepts (Two concepts are related if they co-occur in
-#     #   more than one paragraph.)
-#     related_concepts_dictionary = get_related_concepts(set_of_concepts, paragraphs_occurrences)
-#     print("Related concepts dictionary")
-#     print(related_concepts_dictionary)
-#     print("===============================")
-#     #   Obtain the Concept Graph for the whole document G = (V, E, W), where V represents
-#     #   the concept nodes, E represents the edges between the concepts, and W represents
-#     #   the edge weights.
-#     document_concept_graph = get_document_concept_graph(set_of_concepts, paragraphs_occurrences)
-#     print("Document Concept Graph: ")
-#     print(document_concept_graph)
-#     print("===============================")
-#     #   Check the function for significance
-#     # checking_significance = get_significance("cuestión de almacenamiento", "Par4", related_concepts_dictionary, paragraphs_occurrences_weighted)
-#     # print("Checking significacne: ", checking_significance)
-#     #   Check paragraphs significance dictionary
-#     # paragraphs_significance_dictionary = get_paragraphs_significance_dictionary("cuestión de almacenamiento", paragraphs_occurrences, related_concepts_dictionary, paragraphs_occurrences_weighted)
-#     # print("Paragraphs significance dictionary for cuestión de almacenamiento: ")
-#     # print(paragraphs_significance_dictionary)
-#     # # Get the key paragraph for "cuestión de almacenamiento"
-#     # key_paragraph_for_next = get_key_paragraph_for_significance("cuestión de almacenamiento",
-#     #                                                             set_of_concepts,
-#     #                                                             related_concepts_dictionary,
-#     #                                                             paragraphs_occurrences_weighted)
-#     # print("Key paragraph for cuestión de almacenamiento: ", key_paragraph_for_next)
-#     #  Check the function for obtaining burden for a concept in specific
-#     # checking_cb = get_comprehension_burden_per_concept("cuestión de almacenamiento", key_paragraph_for_next, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted)
-#     # print("Comprehension burden for cuestión de almacenamiento: ", checking_cb)
-#     print("################################################")
-#     print("Results for thesis number: ", counter)
-#     #  Get the comprehension burden for the whole document
-#     print("################################################")
-#     document_cb = get_document_comprehension_burden(set_of_concepts, related_concepts_dictionary, paragraphs_occurrences, paragraphs_occurrences_weighted)
-#     print("Comprehension Burden for the complete document: ", document_cb)
-#     #   Connectivity
-#     #   Obtain the connectivity for the concept_node of "cuestión de almacenamiento".
-#     # check_connectivity = get_connectivity("cuestión de almacenamiento", document_concept_graph)
-#     # print("Connectivity for cuestión de almacenamiento: ", check_connectivity)
-#     #   Obtain the connectivity for the entire document
-#     print("################################################")
-#     document_connectivity = get_document_connectivity(document_concept_graph)
-#     print("Connectivity for the complete document: ", document_connectivity)
-#     #   Obtain the probability of "cuestión de almacenamiento"
-#     # check_probability = get_concept_probability("cuestión de almacenamiento", set_of_concepts)
-#     # print("Probability for cuestión de almacenamiento: ", check_probability)
-#     # #   Obtain the entropy for "Par4"
-#     # check_entropy = get_paragraph_entropy("Par4", set_of_concepts, paragraphs_occurrences_weighted)
-#     # print("Entropy for Par4: ", check_entropy)
-#     #   Obtain the dispersion for the entire document
-#     print("################################################")
-#     dispersion = get_dispersion(set_of_concepts, paragraphs_occurrences_weighted)
-#     print("Dispersion of the complete document: ", dispersion)
-#     print("=================================================")
-#     output_string = output_string + "Thesis number: " + str(counter) + " CB: " + str(document_cb) + " Connectivity: " + str(document_connectivity) + " Dispersion: " + str(dispersion) + "\n"
-#     counter += 1
-#     vector = [document_cb, document_connectivity, dispersion]
-#     results.append(vector)
-#
-# #   Results
-# results = np.array(results)
-# avg, sd = get_average_and_sd(results)
-# print("The average results: ")
-# print(avg)
-# print("The standard deviation results: ")
-# print(sd)
-# print("Standard Deviation Handmade")
-# #print(std_handmade(results, avg))
-# get_avg_and_sd_handmade(results)
-# output_string = output_string + "Average results: " + "cb: " + str(avg[0]) + " connectivity: " + str(avg[1]) + " dispersion: " + str(avg[2]) + "\n"
-# output_string = output_string + "Standard Deviation: " + "cb: " + str(sd[0]) + " connectivity: " + str(sd[1]) + " dispersion: " + str(sd[2]) + "\n"
-# output_file.write(output_string)
-# output_file.close()
+#   Actual results
 results = get_results(theses)
-results = np.array(results)
-max_in_col, max_index_col = get_maximal_and_thesis_position(results)
-maximal_analysis(results, theses)
-print("Type of theses: ", type(theses))
-print("The maximal values per column: ", max_in_col)
-print("The index for the maximal values: ", max_index_col)
+# results = np.array(results)
+# max_in_col, max_index_col = get_maximal_and_thesis_position(results)
+# maximal_analysis(results, theses)
+# print("Type of theses: ", type(theses))
+# print("The maximal values per column: ", max_in_col)
+# print("The index for the maximal values: ", max_index_col)
 
+#   Statistics for concepts
 print("Counter for pattern1: ", counter_pattern1)
 print("Counter for pattern2: ", counter_pattern2)
 print("Counter for pattern3: ", counter_pattern3)
 print("Counter for pattern4: ", counter_pattern4)
+print("Counter for pattern5: ", counter_pattern5)
