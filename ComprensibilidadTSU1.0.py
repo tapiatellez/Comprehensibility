@@ -27,7 +27,7 @@ jar = "/Users/administrador/Downloads/stanford-tagger-4.0.0/stanford-postagger.j
 #   Spacy tagger
 nlp = sp.load("es_core_news_sm")
 matcher = Matcher(nlp.vocab)
-#Globa Variables
+#Global Variables
 counter_pattern1 = 0
 counter_pattern2 = 0
 counter_pattern3 = 0
@@ -559,7 +559,10 @@ def get_document_connectivity(document_concept_graph):
     for concept_node in document_concept_graph.keys():
         document_connectivity = document_connectivity + get_connectivity(concept_node, document_concept_graph)
         concept_node_connectivity_dictionary[concept_node] = get_connectivity(concept_node, document_concept_graph)
-    document_connectivity = document_connectivity/len(document_concept_graph.keys())
+    try:
+        document_connectivity = document_connectivity/len(document_concept_graph.keys())
+    except ZeroDivisionError:
+        pass
     return document_connectivity, concept_node_connectivity_dictionary
 ##########################################################
 #                    Dispersion Measure                  #
@@ -734,6 +737,12 @@ def get_results(theses):
 #   The following function receives a numpy array and returns the average and the
 #   standard deviation for each of its columns.
 def get_average_and_sd(results_array):
+    #   column mean
+    col_mean = np.nanmean(results_array, axis = 0)
+    #   Find indices where nan value is present
+    inds = np.where(np.isnan(results_array))
+    #   Replace inds with avg of column
+    results_array[inds] = np.take(col_mean, inds[1])
     average = np.average(results_array, axis = 0)
     #   With the average we can get the sd for each column
     sd = np.std(results_array, axis = 0)
